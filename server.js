@@ -1,19 +1,23 @@
 const express = require('express');
 const app = express();
-const bodyParser = require('body-parser');
+app.use(express.json());
+const port = process.env.PORT || 3000;
 
-app.use(bodyParser.urlencoded({extended: false}));
-const PORT = process.env.PORT || 5000
-app.post('/user', (req, res, next) => {
-	res.send('<h1>' + req.body.username + '</h1>');
-});
-
-
-app.get('/', (req, res, next) => {
+app.get('/', (req, res) => {
+	res.send(`
 	
-	res.end('<form action="/user" method="POST"><input type="text" name="username"><button type="submit">Create User</button></form>')
-});
+	<!DOCTYPE html>
+	<html>
+	<head>
+	<title>Form</title>
+			</head>
+			<body>
+			<h2>Hello world</h2>
+</body>
+			</html>
+	`);
+})
 
-app.listen(PORT, () => {
-	console.log('Server is running on port 5000');
+app.listen(port, () => {
+	console.log(`Server started on port ${port}`);
 })
